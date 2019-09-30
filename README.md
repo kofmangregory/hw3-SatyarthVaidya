@@ -29,8 +29,9 @@ You will create:
 - The user entered two cities (one after the other) in this case Philadelphia then Seattle.
 - When the user clicks on OK, a new div is added containing weather data and an image. The div containing Philadelphia information was added first then the one about Seattle
 - Closures are used to create and display the weather div elements. 
-
-
+____________________________________________________________________
+![alt text](./hw3-example.png)
+____________________________________________________________________
 
 ## Validation: (20 points)
 - Your JavaScript must be clean, readable, and ESLint warning-free.  You will use the Airbnb Javascript style. 
