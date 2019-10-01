@@ -9,7 +9,7 @@ You will create:
 
 ## Setup:
 - You will use http://api.openweathermap.org  to get weather data
-- You will  https://developers.giphy.com/docs/api/endpoint#search  to get gif image matching the weather
+- You will  use https://developers.giphy.com/docs/api/endpoint#search  to get gif image matching the weather
 - Follow the instructions of the APIs to register and get an API key (if necessary).
 
 ## Specifications:
@@ -37,7 +37,7 @@ ____________________________________________________________________
 - Your JavaScript must be clean, readable, and ESLint warning-free.  You will use the Airbnb Javascript style. 
 - Your HTML file(s) must pass validation at http://validator.w3.org.
 - Your CSS files(s) must pass validation at http://www.css-validator.org/.
-- You may not use jQuery or any other JavaScript library package in this assignment. The goal of this activity is to get comfortable with low-level foundational JavaScript/DOM features. You may, however, use any JavaScript built-in functions. 
+- You may not use jQuery or any other JavaScript library package in this assignment. The goal of this activity is to get comfortable with low-level foundational JavaScript/DOM features. You may, however, use any JavaScript built-in functions and the test libraries covered in class. 
 
 ## Submission:
 - Do not forget to regularly commit your work to GitHub.
