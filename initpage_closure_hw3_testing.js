@@ -1,20 +1,19 @@
-let i = 0;
-
-const changeCityName = function (description, temp) {
-  document.getElementById('temperature1').innerHTML = temp;
-  document.getElementById(`weather_description${i}').innerHTML = description;
-  fetch('https://api.giphy.com/v1/gifs/search?api_key=NA756gtlejRSY9J3szjBsNA6JmZOiM3O&q=${description}&limit=1&offset=0&rating=G&lang=en`).then((response) => response.json()).then((wdata) => {
+function changeCityName(description, temp, i) {
+  document.getElementById(`temperature${i}`).innerHTML = `${temp}K `;
+  document.getElementById(`weather_description${i}`).innerHTML = description;
+  fetch(`https://api.giphy.com/v1/gifs/search?api_key=NA756gtlejRSY9J3szjBsNA6JmZOiM3O&q=${description}&limit=1&offset=0&rating=G&lang=en`).then((response) => response.json()).then((wdata) => {
     document.getElementById(`celebrityImage${i}`).src = wdata.data[0].images.fixed_width.url;
   });
-};
-
-const addRadio = function (t) {
+}
+const addRadio = function (t, i) {
+  console.log('addRadio called');
   if (i > 5) {
     alert('RESET !');
   }
-  const div = document.createElement('div');
-  div.setAttribute('id', 'div');
+  const div = document.createElement(`div${i}`);
+  div.setAttribute('id', `div${i}`);
   function init() {
+    console.log('init called !');
     const lbl = document.createElement('label');
     lbl.setAttribute('id', `city${i}`);
     lbl.innerHTML = `${t} `;
@@ -40,14 +39,15 @@ const addRadio = function (t) {
     picture.setAttribute('width', '304');
     picture.setAttribute('height', '228');
 
-    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${t}&appid=69ee10f3cf697856f4d8db0f5015bfdf`).then((response) => response.json()).then((wData) => { changeCityName(wData.weather[0].description, wData.main.temp); }).catch((err) => alert('Error: could not fetch the data'));
-
+    fetch(`http://api.openweathermap.org/data/2.5/weather?q=${t}&appid=69ee10f3cf697856f4d8db0f5015bfdf`).then((response) => response.json()).then((wData) => { changeCityName(wData.weather[0].description, wData.main.temp, i); }).catch((err) => alert('Error: could not fetch the data'));
     return div;
   }
   return init;
 };
 
 const addImgDiv = function () {
+  console.log('addImgDiv Called !');
+  let i = 0;
   const head = document.createElement('h2');
   head.setAttribute('id', 'headerUpper');
   head.innerHTML = 'Get Weather for City';
@@ -73,17 +73,28 @@ const addImgDiv = function () {
   document.body.appendChild(document.createElement('br'));
 
   const div = document.createElement('div');
-  div.setAttribute('id', 'div0');
+  div.setAttribute('id', 'div_final');
   document.body.appendChild(div);
 
   btn.onclick = function () {
+    div.appendChild(document.createElement('br'));
+    div.appendChild(addRadio(document.getElementById('city').value, i)());
     i += 1;
-    div.appendChild(addRadio(document.getElementById('city').value)());
   };
 };
 
-window.onload = function () {
-  addImgDiv();
+addImgDiv();
+
+const validateInput = (text, notEmpty) => {
+  if (!text) {
+    return false;
+  }
+  if (notEmpty && text.trim().length === 0) {
+    return false;
+  }
+  return true;
 };
 
-module.exports = { addImgDiv, addRadio, changeCityName };
+module.exports = {
+  addImgDiv, addRadio, changeCityName, validateInput,
+};
